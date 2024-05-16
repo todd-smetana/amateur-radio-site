@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Map with APRS Overlay from aprs.fi</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        // Replace with your aprs.fi API key
+        const apiKey = '143718.m0SM9kuwjMRG1A';
+
+        // Initialize the map
+        var map = L.map('map').setView([39.8283, -98.5795], 4); // Centered on the United States
+
+        // Add a base layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Function to add APRS markers
+        function addAPRSMarkers(data) {
+            data.entries.forEach(function(entry) {
+                if (entry.lat && entry.lng) {
+                    var marker = L.marker([entry.lat, entry.lng]).addTo(map);
+                    marker.bindPopup('<b>Callsign:</b> ' + entry.name +
+                                     '<br><b>Time:</b> ' + new Date(entry.time * 1000).toLocaleString() +
+                                     '<br><b>Comment:</b> ' + entry.comment);
+                }
+            });
+        }
+
+        // Function to fetch APRS data from aprs.fi
+        function fetchAPRSData() {
+            fetch(`https://api.aprs.fi/api/get?name=ALL&what=loc&apikey=${apiKey}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'ok') {
+                        addAPRSMarkers(data);
+                    } else {
+                        console.error('Error fetching APRS data:', data.description);
+                    }
+                })
+                .catch(error => console.error('Error fetching APRS data:', error));
+        }
+
+        // Initial fetch of APRS data
+        fetchAPRSData();
+
+        // Fetch new APRS data every 5 minutes
+        setInterval(fetchAPRSData, 300000);
+    </script>
+</body>
+</html>
