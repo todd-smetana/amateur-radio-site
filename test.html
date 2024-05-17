@@ -1,67 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Leaflet Map with APRS Overlay from aprs.fi</title>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <style>
-        #map {
-            height: 100vh;
-            width: 100%;
-        }
-    </style>
+    <title>Weather Data Display</title>
+    <!-- Import Eclipse Paho MQTT JavaScript client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/mqttws31.min.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="map"></div>
+    <h1>Weather Data</h1>
+    <div id="weather-info">
+        <!-- Weather data will be displayed here -->
+    </div>
 
     <script>
-        // Replace with your aprs.fi API key
-        const apiKey = '143718.m0SM9kuwjMRG1A';
+        // MQTT broker configuration
+        var brokerUrl = 'ws://192.168.1.131:1883'; // Replace with your MQTT broker URL
+        var topics = ['CumulusMX/temperature', 'weather/humidity']; // Replace with your MQTT topics
+        
+        // Create a client instance
+        var client = new Paho.MQTT.Client(brokerUrl, 'web-client-' + new Date().getTime());
 
-        // Initialize the map
-        var map = L.map('map').setView([39.8283, -98.5795], 4); // Centered on the United States
+        // Set callback handlers
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived;
 
-        // Add a base layer (OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        // Connect to MQTT broker
+        client.connect({
+            onSuccess: onConnect,
+            onFailure: onFailure
+        });
 
-        // Function to add APRS markers
-        function addAPRSMarkers(data) {
-            data.entries.forEach(function(entry) {
-                if (entry.lat && entry.lng) {
-                    var marker = L.marker([entry.lat, entry.lng]).addTo(map);
-                    marker.bindPopup('<b>Callsign:</b> ' + entry.name +
-                                     '<br><b>Time:</b> ' + new Date(entry.time * 1000).toLocaleString() +
-                                     '<br><b>Comment:</b> ' + entry.comment);
-                }
+        // Called when the client connects
+        function onConnect() {
+            console.log('Connected to MQTT broker');
+            // Subscribe to topics
+            topics.forEach(function(topic) {
+                client.subscribe(topic);
             });
         }
 
-        // Function to fetch APRS data from aprs.fi
-        function fetchAPRSData() {
-            fetch(`https://api.aprs.fi/api/get?name=ALL&what=loc&apikey=${apiKey}&format=json`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.result === 'ok') {
-                        addAPRSMarkers(data);
-                    } else {
-                        console.error('Error fetching APRS data:', data.description);
-                    }
-                })
-                .catch(error => console.error('Error fetching APRS data:', error));
+        // Called when the client loses its connection
+        function onConnectionLost(responseObject) {
+            if (responseObject.errorCode !== 0) {
+                console.log('Connection lost:', responseObject.errorMessage);
+            }
         }
 
-        // Initial fetch of APRS data
-        fetchAPRSData();
+        // Called when a message arrives
+        function onMessageArrived(message) {
+            console.log('Message received:', message.destinationName, message.payloadString);
+            // Handle received message and update UI
+            updateWeatherData(message.destinationName, message.payloadString);
+        }
 
-        // Fetch new APRS data every 5 minutes
-        setInterval(fetchAPRSData, 300000);
+        // Handle connection failure
+        function onFailure(error) {
+            console.log('Connection failed:', error.errorMessage);
+        }
+
+        // Update weather data on the page
+        function updateWeatherData(topic, data) {
+            var weatherInfoDiv = document.getElementById('weather-info');
+            var parsedData = JSON.parse(data); // Assuming data is JSON format
+
+            switch(topic) {
+                case 'weather/temperature':
+                    weatherInfoDiv.innerHTML += '<p>Temperature: ' + parsedData.temperature + ' °C</p>';
+                    break;
+                case 'weather/humidity':
+                    weatherInfoDiv.innerHTML += '<p>Humidity: ' + parsedData.humidity + '%</p>';
+                    break;
+                // Add more cases for other weather data if needed
+                default:
+                    // Ignore unknown topics
+            }
+        }
     </script>
 </body>
 </html>
+
