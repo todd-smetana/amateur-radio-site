@@ -19,7 +19,7 @@
         var topics = ['CumulusMX/temperature', 'weather/humidity']; // Replace with your MQTT topics
         
         // Create a client instance
-        var client = new Paho.MQTT.Client(brokerUrl, 'web-client-' + new Date().getTime());
+        var client = new Paho.Client(brokerUrl, 'web-client-' + new Date().getTime());
 
         // Set callback handlers
         client.onConnectionLost = onConnectionLost;
