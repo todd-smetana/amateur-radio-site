@@ -1,42 +1,230 @@
-<!DOCTYPE HTML>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <title>KF0AIT QSO</title>
-    <meta name="description" content="Information on amateur radio call sign KF0AIT">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="apple-touch-icon" href="icon.png">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  </head>
-  <body class="pt-4">
-    <div class="container">
-      <h1>KF0AIT</h1>
-      <p class="lead">Kilo Foxtrot Zero Alpha India Tango</p> 
-      <ul>
-        <li>Operator: Todd Smetana</li>
-        <li>
-          Links:
-          <ul>
-  
-			
-			
-			
-			<li><a href="https://todd-smetana.github.io/VA3HDL-hamdashboard/hamdash.html">Hamshack Dash</a></li>
-			<li><a href="https://todd-smetana.github.io/VA3HDL-camdashboard/camdash.html">Camshack Dash</a></li>
-			<li><a href="https://todd-smetana.github.io/Hamshack-Dashboard/hamshack-dashboard.html?callsign=KF0AIT&offset=6&state=SD1">Hamshack Dashboard</a></li>
-			<li><a href="https://climate.sdstate.edu/">SDSU Mesonet</a></li>
-			<li><a href="https://weather.im/iembot/">NWS IEMBot</a></li>
-			<li><a href="https://www.arcgis.com/apps/dashboards/fbaac9e7423f41c7a5ebcdbace527e8c">Sioux Falls Traffic Cams</a></li>
-		  <li><a href="https://weatherstar.netbymatt.com/">WeatherStar</a></li>
-			<li><a href=".\IC-7300_ENG_BM_9.pdf">IC-7300 Manual</a></li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KF0AIT</title>
 
-		  
-			
-			
-		  </ul>
-        </li>
-        
-      </ul>
-    </div>
-  </body>
+  <style>
+    /* =========================
+       THEME VARIABLES
+       ========================= */
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --accent: #2f6f4e;     /* ham-radio green */
+      --muted: #555555;
+      --border: #000000;
+      --link: #2f6f4e;
+      --max-width: 900px;
+    }
+
+    body.dark {
+      --bg: #0e1111;
+      --text: #e6e6e6;
+      --accent: #6bbf8a;
+      --muted: #aaaaaa;
+      --border: #6bbf8a;
+      --link: #6bbf8a;
+    }
+
+    /* =========================
+       BASE STYLES
+       ========================= */
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+      text-align: center;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header h3 {
+      font-size: 0.95rem;
+      font-weight: normal;
+      margin: 0 0 1.5rem 0;
+      color: var(--muted);
+    }
+
+    hr {
+      width: 300px;
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0.5rem auto 1rem auto;
+    }
+
+    p {
+      line-height: 1.6;
+      margin: 0.75rem 0;
+    }
+
+    /* =========================
+       LINK GRID (RESPONSIVE)
+       ========================= */
+    .links-section {
+      margin-top: 3rem;
+    }
+
+    .links-section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--muted);
+      letter-spacing: 0.15rem;
+    }
+
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  align-items: stretch; /* forces equal height cells */
+}
+
+.link-grid a {
+  display: flex;                /* enables centering */
+  align-items: center;          /* vertical center */
+  justify-content: center;      /* horizontal center */
+  min-height: 28px;             /* uniform button height */
+  padding: 0.75rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--link);
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  background-color: transparent;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+
+    .link-grid a:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+    }
+
+    /* =========================
+       DARK MODE TOGGLE
+       ========================= */
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.7rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+    footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+    🌙 / ☀️
+  </button>
+
+  <main>
+    <header>
+      <h1>K F 0 A I T</h1>
+      <hr>
+      <h3><strong>Kilo Foxtrot Zero Alpha India Tango</strong></h3>
+    </header>
+
+    <section>
+      <p>
+        Welcome to my website.
+        My name is Todd and I am located in
+        Brookings, South Dakota (<strong>EN14oh</strong>).
+      </p>
+
+      <p>
+        This is currently a placeholder site with a few links.
+      </p>
+    </section>
+
+    <!-- =========================
+         LINKS SECTION
+         ========================= -->
+    <section aria-label="Links" class="links-section">
+      <h2>RESOURCES</h2>
+
+      <div class="link-grid">
+        <a href="https://www.qrz.com/db/KF0AIT">myQRZ</a>
+        <a href="https://aprs.fi/?call=KF0AIT-1,KF0AIT-2,KF0AIT-3,KF0AIT-4,KF0AIT-5,KF0AIT-10,%20KF0AIT-14,%20P-KF0AIT">myAPRS</a>
+        <a href="http://kf0ait.ampr.net">44Net</a>
+        <a href="mailto:KF0AIT@WINLINK.ORG">Contact</a>
+        <a href="https://todd-smetana.github.io/VA3HDL-hamdashboard/hamdash.html">Dashboard</a>
+        <a href="https://climate.sdstate.edu/">Mesonet</a>
+        <a href="https://weather.im/iembot/">NWS IEMBot</a>
+        <a href="https://weatherstar.netbymatt.com/">WeatherStar</a>
+		<a href="https://sondehub.org/">SondeHub</a>
+		<a href="https://radiosondy.info/">RadioSondy</a>
+		<a href="https://www.broadcastify.com/calls/trs/12039">Broadcastify</a>
+		<a href="https://tinygs.com/station/Rushmore_GS@5871470618">TinyGS</a>
+		<a href="https://www.wunderground.com/dashboard/pws/KSDBROOK44">Weather Station</a>
+		
+
+        <a href="https://todd-smetana.github.io/amateur-radio-site/IC-7300_ENG_BM_9.pdf">IC-7300 Man</a>
+        <a href="https://github.com/todd-smetana/amateur-radio-site/blob/main/Yaesu_FTM100DR_Operating_Manual.pdf">FTM-100D Man</a>
+        <a href="https://github.com/todd-smetana/amateur-radio-site/blob/main/ysu-ft-70dr_hg.pdf">FT-70DR Man</a>
+        <!-- Add as many links as you like -->
+      </div>
+    </section>
+
+    <footer>
+      KF0AIT
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem(
+        'theme',
+        document.body.classList.contains('dark') ? 'dark' : 'light'
+      );
+    }
+
+    // Load saved theme or system preference
+    (function () {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.body.classList.add('dark');
+      } else if (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+    })();
+  </script>
+</body>
 </html>
+
+
