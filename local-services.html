@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Network Dashboard</title>
+
+<style>
+:root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --hover: #334155;
+    --text: #e5e7eb;
+    --radius: 14px;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 1rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.tile {
+    background: var(--card);
+    border-radius: var(--radius);
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.tile:hover {
+    background: var(--hover);
+    transform: translateY(-3px);
+}
+
+.tile svg {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 0.4rem;
+}
+
+.label {
+    font-size: 0.85rem;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+<h1>🏠 Home Network Dashboard</h1>
+
+<div class="grid">
+
+    <!-- Pi-Star -->
+    <a class="tile" href="http://pi-star.local" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="28" fill="#cc0000"/>
+            <text x="32" y="40" font-size="26" fill="white" text-anchor="middle">π</text>
+        </svg>
+        <div class="label">Pi-Star</div>
+    </a>
+
+    <!-- AllStar -->
+    <a class="tile" href="http://192.168.1.50/supermon2/link.php?nodes=59505" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <polygon points="32,6 38,26 58,26 42,38 48,58 32,46 16,58 22,38 6,26 26,26"
+                     fill="#facc15"/>
+        </svg>
+        <div class="label">AllStar Node</div>
+    </a>
+
+    <!-- TinyGS -->
+    <a class="tile" href="http://192.168.1.29/" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <rect x="10" y="10" width="44" height="44" rx="8" fill="#22c55e"/>
+            <text x="32" y="40" font-size="16" fill="white" text-anchor="middle">GS</text>
+        </svg>
+        <div class="label">TinyGS</div>
+    </a>
+
+    <!-- Home Assistant -->
+    <a class="tile" href="http://homeassistant.local:8123" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <path d="M32 6 L8 30 H16 V58 H48 V30 H56 Z" fill="#38bdf8"/>
+        </svg>
+        <div class="label">Home Assistant</div>
+    </a>
+
+    <!-- Proxmox --> 	
+    <a class="tile" href="https://192.168.1.195:8006/" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="28" fill="#f97316"/>
+            <path d="M32 14 L40 32 L32 50 L24 32 Z" fill="white"/>
+        </svg>
+        <div class="label">Proxmox</div>
+    </a>
+	
+	    <!-- Portainer (PC) -->
+    <a class="tile" href="https://192.168.1.185:9443/" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <rect x="14" y="14" width="36" height="36" fill="#0ea5e9"/>
+            <text x="32" y="40" font-size="18" fill="white" text-anchor="middle">🐳</text>
+        </svg>
+        <div class="label">Portainer (PC)</div>
+    </a>
+	
+	
+	    <!-- Node Red -->
+    <a class="tile" href="http://192.168.1.185:1880/" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <!-- Node-RED base -->
+        <rect x="10" y="16" width="44" height="32" rx="6" ry="6"
+              fill="#8f0000"/>
+
+        <!-- Node-RED nodes -->
+        <circle cx="22" cy="32" r="4" fill="#ffffff"/>
+        <circle cx="42" cy="32" r="4" fill="#ffffff"/>
+
+        <!-- Flow connection -->
+        <path d="M26 32 H38"
+              stroke="#ffffff"
+              stroke-width="3"
+              stroke-linecap="round"/>
+
+        <!-- Input/output tabs -->
+        <rect x="6" y="26" width="4" height="12" rx="2" fill="#555"/>
+        <rect x="54" y="26" width="4" height="12" rx="2" fill="#555"/>
+    </svg>
+        <div class="label">Node Red</div>
+    </a>	
+	
+	
+	
+	
+
+    <!-- Portainer (Pi) -->
+    <a class="tile" href="http://192.168.1.131:9000/" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <rect x="14" y="14" width="36" height="36" fill="#0ea5e9"/>
+            <text x="32" y="40" font-size="18" fill="white" text-anchor="middle">🐳</text>
+        </svg>
+        <div class="label">Portainer (Pi)</div>
+    </a>
+	
+    <!-- Retro Pi -->
+    <a class="tile" href="http://192.168.1.106" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <!-- yellow circle for Pac-Man -->
+        <circle cx="32" cy="32" r="28" fill="#ffcc00"/>
+        <!-- white triangle for mouth -->
+        <polygon points="32,32 60,20 60,44" fill="#1a1a2e"/>
+        <!-- eye -->
+        <circle cx="40" cy="20" r="3" fill="#000"/>
+    </svg>
+        <div class="label">Retro Pi</div>
+    </a>	
+	
+	
+
+    <!-- TP-Link -->
+    <a class="tile" href="http://192.168.1.1" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="26" fill="#0ea5e9"/>
+            <text x="32" y="40" font-size="16" fill="white" text-anchor="middle">TP</text>
+        </svg>
+        <div class="label">TP-Link</div>
+    </a>
+	
+	<!-- TP-Link AP-->
+    <a class="tile" href="http://192.168.1.2" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="26" fill="#0ea5e9"/>
+            <text x="32" y="40" font-size="16" fill="white" text-anchor="middle">TP</text>
+        </svg>
+        <div class="label">TP-Link AP</div>
+    </a>
+	
+	<!-- HP Switch-->
+    <a class="tile" href="http://192.168.1.154" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="#3333cc"/>
+        <!-- switch body -->
+        <rect x="16" y="24" width="32" height="16" rx="2" fill="white"/>
+        <!-- ports -->
+        <rect x="20" y="28" width="4" height="8" fill="#3333cc"/>
+        <rect x="28" y="28" width="4" height="8" fill="#3333cc"/>
+        <rect x="36" y="28" width="4" height="8" fill="#3333cc"/>
+        <rect x="44" y="28" width="4" height="8" fill="#3333cc"/>
+    </svg>
+        <div class="label">HP Switch</div>
+    </a>	
+	
+	
+	
+	
+
+    <!-- OpenWRT -->
+    <a class="tile" href="http://192.168.1.42/" target="_blank">
+        <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="28" fill="#10b981"/>
+            <text x="32" y="40" font-size="14" fill="white" text-anchor="middle">WRT</text>
+        </svg>
+        <div class="label">OpenWRT</div>
+    </a>
+
+    <!-- Netgear NAS -->
+    <a class="tile" href="http://192.168.1.98/admin/" target="_blank">
+        <svg viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="28" fill="#4b5563"/>
+    
+    <!-- Drive body -->
+    <rect x="18" y="20" width="28" height="20" rx="3" fill="white"/>
+    
+    <!-- Drive lines -->
+    <line x1="22" y1="26" x2="42" y2="26" stroke="#4b5563" stroke-width="2"/>
+    <line x1="22" y1="31" x2="42" y2="31" stroke="#4b5563" stroke-width="2"/>
+    
+    <!-- LED -->
+    <circle cx="41" cy="36" r="2" fill="#22c55e"/>
+  </svg>
+        <div class="label">Netgear NAS</div>
+    </a>
+	
+	
+	<!-- Rdio Scanner -->
+    <a class="tile" href="http://192.168.1.83:3000" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="#ff6600"/>
+        <rect x="20" y="20" width="24" height="24" rx="4" fill="white"/>
+        <circle cx="32" cy="32" r="6" fill="#ff6600"/>
+        <line x1="32" y1="12" x2="32" y2="20" stroke="white" stroke-width="2"/>
+    </svg>
+        <div class="label">Rdio Scanner</div>
+    </a>
+	
+	<!-- Trunking Recorder -->
+    <a class="tile" href="http://192.168.1.83:81" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="#ff6600"/>
+        <rect x="20" y="20" width="24" height="24" rx="4" fill="white"/>
+        <circle cx="32" cy="32" r="6" fill="#ff6600"/>
+        <line x1="32" y1="12" x2="32" y2="20" stroke="white" stroke-width="2"/>
+    </svg>
+        <div class="label">Trunking Recorder</div>
+    </a>
+	
+	<!-- Weather Station -->
+    <a class="tile" href="http://192.168.1.83:8998" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="#3399ff"/>
+        <!-- thermometer bulb -->
+        <circle cx="32" cy="44" r="6" fill="white"/>
+        <!-- thermometer stem -->
+        <rect x="30" y="18" width="4" height="26" fill="white"/>
+        <!-- mercury -->
+        <rect x="31" y="24" width="2" height="20" fill="#ff3333"/>
+    </svg>
+        <div class="label">Weather Station</div>
+    </a>
+	
+	
+	
+		<!--PBX -->
+    <a class="tile" href="http://192.168.1.231" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="#0073e6"/>
+        <!-- handset -->
+        <path d="M20 24 C16 22, 16 18, 20 16 L44 16 C48 18, 48 22, 44 24 L40 28 C38 30, 26 30, 24 28 Z" fill="white"/>
+        <!-- rotary dial -->
+        <circle cx="32" cy="44" r="8" fill="white"/>
+        <circle cx="32" cy="44" r="4" fill="#0073e6"/>
+    </svg>
+        <div class="label">PBX</div>
+    </a>
+	
+	
+		<!--WLED -->
+    <a class="tile" href="http://192.168.1.8" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <!-- LED Body with Domed Top -->
+        <path d="M22,20 
+                 Q32,0 42,20 
+                 L42,44 
+                 L22,44 
+                 Z" fill="#00ff00" stroke="#006600" stroke-width="1"/>
+        
+        <!-- LED Leads -->
+        <rect x="26" y="44" width="3" height="14" fill="#666"/>
+        <rect x="35" y="44" width="3" height="14" fill="#666"/>
+    </svg>
+        <div class="label">WLED</div>
+    </a>	
+	
+		<!--webcam -->
+    <a class="tile" href="http://192.168.1.191" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="#666"/>
+        <circle cx="32" cy="32" r="14" fill="black"/>
+        <circle cx="32" cy="32" r="8" fill="#00ccff"/>
+        <rect x="28" y="48" width="8" height="6" fill="#333"/>
+    </svg>
+        <div class="label">Webcam</div>
+    </a>		
+	
+	
+		<!--Aredn -->
+    <a class="tile" href="http://192.168.1.222" target="_blank">
+        <svg viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="28" fill="#10b981"/>
+    
+    <!-- Nodes -->
+    <circle cx="22" cy="32" r="4" fill="white"/>
+    <circle cx="42" cy="32" r="4" fill="white"/>
+    <circle cx="32" cy="22" r="4" fill="white"/>
+    <circle cx="32" cy="42" r="4" fill="white"/>
+    
+    <!-- Connections -->
+    <line x1="22" y1="32" x2="32" y2="22" stroke="white" stroke-width="2"/>
+    <line x1="42" y1="32" x2="32" y2="22" stroke="white" stroke-width="2"/>
+    <line x1="22" y1="32" x2="32" y2="42" stroke="white" stroke-width="2"/>
+    <line x1="42" y1="32" x2="32" y2="42" stroke="white" stroke-width="2"/>
+  </svg>
+        <div class="label">Aredn</div>
+    </a>	
+
+
+
+		<!--Aredn 2-->
+    <a class="tile" href="http://192.168.1.149" target="_blank">
+        <svg viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="28" fill="#10b981"/>
+    
+    <!-- Nodes -->
+    <circle cx="22" cy="32" r="4" fill="white"/>
+    <circle cx="42" cy="32" r="4" fill="white"/>
+    <circle cx="32" cy="22" r="4" fill="white"/>
+    <circle cx="32" cy="42" r="4" fill="white"/>
+    
+    <!-- Connections -->
+    <line x1="22" y1="32" x2="32" y2="22" stroke="white" stroke-width="2"/>
+    <line x1="42" y1="32" x2="32" y2="22" stroke="white" stroke-width="2"/>
+    <line x1="22" y1="32" x2="32" y2="42" stroke="white" stroke-width="2"/>
+    <line x1="42" y1="32" x2="32" y2="42" stroke="white" stroke-width="2"/>
+  </svg>
+        <div class="label">Aredn2</div>
+    </a>		
+	
+		<!--Virtual Radar -->
+    <a class="tile" href="http://192.168.1.83/virtualradar/desktop.html" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="28" fill="#009900"/>
+        <!-- radar lines -->
+        <circle cx="32" cy="32" r="12" stroke="white" stroke-width="2" fill="none"/>
+        <circle cx="32" cy="32" r="20" stroke="white" stroke-width="1" fill="none"/>
+        <line x1="32" y1="32" x2="48" y2="16" stroke="white" stroke-width="2"/>
+        <!-- airplane blip -->
+        <circle cx="44" cy="20" r="2" fill="red"/>
+    </svg>
+        <div class="label">ADSB</div>
+    </a>		
+	
+		<!--Radio Sonde -->
+    <a class="tile" href="http://192.168.1.194" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <!-- Balloon body -->
+        <ellipse cx="32" cy="26" rx="18" ry="22" fill="#ffffff" stroke="#cccccc" stroke-width="2"/>
+
+        <!-- Balloon highlight -->
+        <ellipse cx="26" cy="18" rx="5" ry="8" fill="#ffffff" opacity="0.6"/>
+
+        <!-- Balloon knot -->
+        <polygon points="30,46 34,46 32,50" fill="#dddddd"/>
+
+        <!-- String -->
+        <path d="M32 50 C30 56, 34 58, 32 64"
+              stroke="#666"
+              stroke-width="2"
+              fill="none"/>
+    </svg>
+        <div class="label">Radio Sonde</div>
+    </a>	
+
+		<!--433 -->
+    <a class="tile" href="http://192.168.1.162/" target="_blank">
+        <svg viewBox="0 0 64 64">
+        <!-- Sensor body -->
+        <rect x="18" y="14" width="28" height="36" rx="4" ry="4"
+              fill="#dddddd" stroke="#999999" stroke-width="2"/>
+
+        <!-- Sensor indicator -->
+        <circle cx="32" cy="26" r="3" fill="#66cc66"/>
+
+        <!-- RF waves -->
+        <path d="M46 22 C52 26, 52 38, 46 42"
+              stroke="#666"
+              stroke-width="2"
+              fill="none"/>
+        <path d="M50 18 C58 26, 58 38, 50 46"
+              stroke="#666"
+              stroke-width="2"
+              fill="none"/>
+
+        <!-- Antenna nub -->
+        <rect x="30" y="8" width="4" height="6" fill="#999"/>
+    </svg>
+        <div class="label">433</div>
+    </a>	
+
+
+</div>
+</body>
+</html>
